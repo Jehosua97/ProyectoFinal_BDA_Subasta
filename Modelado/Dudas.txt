@@ -1,8 +1,0 @@
-nume serie auto es una llave unique aunque no se como representarla
-La direccion esta bien asi o la desglozamos mas en la casa
-La lista de las actividades de la hacienda la incluimos dentro de el objeto, o debe crearse aparte
-En la cifra real de lo vendido le pusimos un NULL porque sino no podriamos insertar valores
-En el comprador hice una llave primaria de comprador_id, pero podriamos utilizar su correo como primaria
-La lista de pais no contiene estado, este atributo se incluye en el objeto comprador
-La CLABE es de tipo Unique en Datos_financieros
-En tipo de tarjeta dentro de Num_tarjeta puede hacerse una lista de "credito y debito" o asi lo dejamos
