@@ -10,7 +10,7 @@ create pfile='/u01/app/oracle/oradata/CHJOPROY/disk_1/dbs/initchjoproy.ora.sinAr
 
 --Modificación de parámetros para habilitar archivelog
 alter system set log_archive_max_processes=5 scope=spfile;
-alter system set log_archive_dest_1='LOCATION=/u01/app/oracle/oradata/CHJOPROY/disk_1/fast-reco-area/archivelog MANDATORY' scope=spfile;
+alter system set log_archive_dest_1='LOCATION=/u01/app/oracle/oradata/CHJOPROY/disk_1/archivelog MANDATORY' scope=spfile;
 alter system set log_archive_dest_2='LOCATION=/u01/app/oracle/oradata/CHJOPROY/disk_2/archivelog' scope=spfile;
 alter system set log_archive_format='arch_chjoproy_%t_%s_%r.arc' scope=spfile;
 alter system set log_archive_min_succeed_dest=1 scope=spfile;

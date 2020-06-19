@@ -14,7 +14,7 @@ alter system set shared_servers=6 scope=both;
 #CHJOPROY_S =
 #  (DESCRIPTION =
 #    (ADDRESS_LIST =
-#      (ADDRESS = (PROTOCOL = TCP)(HOST = pc-jajv.fi.unam)(PORT = 1521))
+#      (ADDRESS = (PROTOCOL = TCP)(HOST = pc-jajv.fi.unam)(PORT = 1521))		##OJO AQUI CON CON NOMBRE HOST
 #       (SERVICE=SHARED)
 #    )
 #    (CONNECT_DATA =
