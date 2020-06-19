@@ -1,10 +1,8 @@
---
--- er/studio data architect sql code generation
--- project :      modelado er.dm1
---
--- date created : thursday, june 18, 2020 15:00:38
--- target dbms : oracle 12c
---
+#--@Autores:Chavira Tapia Andrés Uriel
+#--			Joya Venegas Jehosua Alan
+#--@Fecha	18/06/2020
+#--@Descripcion	Instrucciones DDL para crear tablas e índices con base en el modelo relacional elaborado.
+
 
 -- 
 -- table: actividad 
@@ -16,8 +14,8 @@ create table actividad(
     constraint actividad_pk primary key (actividad_id)
     using index (
         create unique index actividad_pk on actividad(actividad_id)
-        tablespace indexes_tbs
-)
+        tablespace indices_tbs
+)tablespace objetos_tbs
 ;
 
 
@@ -33,9 +31,9 @@ create table pais(
     constraint pais_pk primary key (pais_id)
     using index (
         create unique index pais_pk on pais(pais_id)
-        tablespace indexes_tbs
+        tablespace indices_tbs
     ),
-)
+)tablespace compradores_tbs
 ;
 
 
@@ -60,13 +58,13 @@ create table comprador(
     constraint comprador_pk primary key (comprador_id)
     using index (
         create unique index comprador_pk on comprador(comprador_id)
-        tablespace indexes_tbs
+        tablespace indices_tbs
     ), 
     constraint pais_id_fk foreign key (pais_id)
     references pais(pais_id),
     constraint aval_id_fk foreign key (aval_id)
     references comprador(comprador_id)
-)
+)tablespace compradores_tbs
 ;
 
 
@@ -84,9 +82,9 @@ create table subasta(
     constraint subasta_pk primary key (subasta_id)
     using index (
         create unique index subasta_pk on subasta(subasta_id)
-        tablespace indexes_tbs
+        tablespace indices_tbs
     )
-)
+)tablespace subastas_tbs
 ;
 
 
@@ -103,9 +101,9 @@ create table status_objeto(
     constraint status_objeto_pk primary key (status_objeto_id)
     using index (
         create unique index status_objeto_pk on status_objeto(status_objeto_id)
-        tablespace indexes_tbs
+        tablespace indices_tbs
     )
-)
+)tablespace archivo_tbs
 ;
 
 
@@ -128,7 +126,7 @@ create table objeto(
     constraint objeto_pk primary key (objeto_id)
     using index (
         create unique index objeto_pk on objeto(objeto_id)
-        tablespace indexes_tbs
+        tablespace indices_tbs
     ), 
     constraint propietario_objeto_id_fk foreign key (propietario_objeto_id)
     references comprador(comprador_id),
@@ -136,7 +134,7 @@ create table objeto(
     references subasta(subasta_id),
     constraint status_objeto_id_fk foreign key (status_objeto_id)
     references status_objeto(status_objeto_id)
-)
+)tablespace objetos_tbs
 ;
 
 
@@ -153,11 +151,11 @@ create table hacienda(
     constraint hacienda_pk primary key (objeto_id)
     using index (
         create unique index hacienda_pk on hacienda(objeto_id)
-        tablespace indexes_tbs
+        tablespace indices_tbs
     ), 
     constraint hacienda_objeto_id_fk foreign key (objeto_id)
     references objeto(objeto_id)
-)
+)tablespace objetos_tbs
 ;
 
 
@@ -172,13 +170,13 @@ create table actividad_hacienda(
     constraint actividad_hacienda_pk primary key (objeto_id, actividad_id)
     using index (
         create unique index actividad_hacienda_pk on actividad_hacienda(objeto_id, actividad_id)
-        tablespace indexes_tbs
+        tablespace indices_tbs
     ), 
     constraint actividad_id_fk foreign key (actividad_id)
     references actividad(actividad_id),
     constraint actividad_hacienda_objeto_id_fk foreign key (objeto_id)
     references hacienda(objeto_id)
-)
+)tablespace objetos_tbs
 ;
 
 
@@ -193,8 +191,8 @@ create table marca(
     constraint marca_pk primary key (marca_id)
     using index (
         create unique index marca_pk on marca(marca_id)
-        tablespace indexes_tbs
-)
+        tablespace indices_tbs
+)tablespace objetos_tbs
 ;
 
 
@@ -210,10 +208,10 @@ create table modelo(
     constraint modelo_pk primary key (modelo_id)
     using index (
         create unique index modelo_pk on modelo(modelo_id)
-        tablespace indexes_tbs, 
+        tablespace indices_tbs, 
     constraint marca_id_fk foreign key (marca_id)
     references marca(marca_id)
-)
+)tablespace objetos_tbs
 ;
 
 
@@ -231,12 +229,12 @@ create table auto(
     constraint auto_pk primary key (objeto_id)
     using index (
         create unique index auto_pk on auto(objeto_id)
-        tablespace indexes_tbs, 
+        tablespace indices_tbs, 
     constraint modelo_id_fk foreign key (modelo_id)
     references modelo(modelo_id),
     constraint auto_objeto_id_fk foreign key (objeto_id)
     references objeto(objeto_id)
-)
+)tablespace objetos_tbs
 ;
 
 
@@ -253,8 +251,8 @@ create table banco(
     constraint banco_pk primary key (banco_id)
     using index (
         create unique index banco_pk on banco(banco_id)
-        tablespace indexes_tbs
-)
+        tablespace indices_tbs
+)tablespace compradores_tbs
 ;
 
 
@@ -272,10 +270,10 @@ create table casa(
     constraint casa_pk primary key (objeto_id)
     using index (
         create unique index casa_pk on casa(objeto_id)
-        tablespace indexes_tbs, 
+        tablespace indices_tbs, 
     constraint casa_objeto_id_fk foreign key (objeto_id)
     references objeto(objeto_id)
-)
+)tablespace objetos_tbs
 ;
 
 
@@ -292,12 +290,12 @@ create table cuenta_banco(
     constraint cuenta_banco_pk primary key (cuenta_banco_id)
     using index (
         create unique index cuenta_banco_pk on cuenta_banco(cuenta_banco_id)
-        tablespace indexes_tbs, 
+        tablespace indices_tbs, 
     constraint banco_id_fk foreign key (banco_id)
     references banco(banco_id),
     constraint cuenta_banco_comprador_id_fk foreign key (comprador_id)
     references comprador(comprador_id)
-)
+)tablespace compradores_tbs
 ;
 
 
@@ -317,10 +315,10 @@ create table tarjeta(
     constraint tarjeta_pk primary key (tarjeta_id)
     using index (
         create unique index tarjeta_pk on tarjeta(tarjeta_id)
-        tablespace indexes_tbs, 
+        tablespace indices_tbs, 
     constraint tarjeta_comprador_id_fk foreign key (comprador_id)
     references comprador(comprador_id)
-)
+)tablespace compradores_tbs
 ;
 
 
@@ -340,12 +338,12 @@ create table factura(
     constraint factura_pk primary key (factura_id)
     using index (
         create unique index factura_pk on factura(factura_id)
-        tablespace indexes_tbs, 
+        tablespace indices_tbs, 
     constraint tarjeta_id_fk foreign key (tarjeta_id)
     references tarjeta(tarjeta_id),
     constraint factura_cuenta_banco_id_fk foreign key (cuenta_banco_id)
     references cuenta_banco(cuenta_banco_id)
-)
+)tablespace subastas_tbs
 ;
 
 
@@ -361,10 +359,10 @@ create table foto_objeto(
     constraint foto_objeto_pk primary key (foto_objeto_id)
     using index (
         create unique index foto_objeto_pk on foto_objeto(foto_objeto_id)
-        tablespace indexes_tbs, 
+        tablespace indices_tbs, 
     constraint foto_objeto_objeto_id_fk foreign key (objeto_id)
     references objeto(objeto_id)
-)
+)tablespace fotos_tbs
 ;
 
 
@@ -381,12 +379,12 @@ create table historico_status_objeto(
     constraint historico_status_objeto_pk primary key (historico_status_objeto_id)
     using index (
         create unique index historico_status_objeto_pk on historico_status_objeto(historico_status_objeto_id)
-        tablespace indexes_tbs, 
+        tablespace indices_tbs, 
     constraint historico_status_objeto_objeto_id_fk foreign key (objeto_id)
     references objeto(objeto_id),
     constraint historico_status_objeto_status_objeto_id_fk foreign key (status_objeto_id)
     references status_objeto(status_objeto_id)
-)
+)tablespace archivo_tbs
 ;
 
 
@@ -405,14 +403,14 @@ create table oferta(
     constraint oferta_pk primary key (oferta_id)
     using index (
         create unique index oferta_pk on oferta(oferta_id)
-        tablespace indexes_tbs, 
+        tablespace indices_tbs, 
     constraint factura_id_fk foreign key (factura_id)
     references factura(factura_id),
     constraint oferta_objeto_id_fk foreign key (objeto_id)
     references objeto(objeto_id),
     constraint oferta_comprador_id_fk foreign key (comprador_id)
     references comprador(comprador_id)
-)
+)tablespace subastas_tbs
 ;
 
 
@@ -428,101 +426,99 @@ create table password_comprador(
     constraint password_comprador_pk primary key (password_comprador_id)
     using index (
         create unique index password_comprador_pk on password_comprador(password_comprador_id)
-        tablespace indexes_tbs, 
+        tablespace indices_tbs, 
     constraint password_comprador_comprador_id_fk foreign key (comprador_id)
     references comprador(comprador_id)
-)
+)tablespace compradores_tbs
 ;
 
-
+--Índices UNIQUE
 create unique index comprador_correo_electronico_iuk on comprador(correo_electronico)
-tablespace indexes_tbs;
+tablespace indices_tbs;
 
 create unique index auto_num_serie_iuk on auto(num_serie)
-tablespace indexes_tbs;
+tablespace indices_tbs;
 
-
-
-
+--Índices FK (NONUNIQUE)
 create index comprador_pais_id_fk on comprador(pais_id)
-tablespace indexes_tbs;
+tablespace indices_tbs;
 
 create index comprador_aval_id_fk on comprador(aval_id)
-tablespace indexes_tbs;
+tablespace indices_tbs;
 
 create index objeto_propietario_objeto_id_fk on objeto(propietario_objeto_id)
-tablespace indexes_tbs;
+tablespace indices_tbs;
 
 create index objeto_subasta_id_fk on objeto(subasta_id)
-tablespace indexes_tbs;
+tablespace indices_tbs;
 
 -- status_objeto probablemente contenga menos de 50 registros.
 -- create index objeto_status_objeto_id_fk on objeto(status_objeto_id)
--- tablespace indexes_tbs;
+-- tablespace indices_tbs;
 
 -- hacienda probablemente no consulte objeto_id más que en su creación.
 -- create index hacienda_objeto_id_fk on hacienda(objeto_id)
--- tablespace indexes_tbs;
+-- tablespace indices_tbs;
 
 -- actividad probablemente contenga menos de 50 registros.
 -- create index actividad_hacienda_actividad_id_fk on actividad_hacienda(actividad_id)
--- tablespace indexes_tbs;
+-- tablespace indices_tbs;
 
 create index actividad_hacienda_objeto_id_fk on actividad_hacienda(objeto_id, actividad_id)
-tablespace indexes_tbs;
+tablespace indices_tbs;
 
 -- marca probablemente contenga menos de 50 registros.
 -- create index modelo_marca_id_fk on modelo(marca_id)
--- tablespace indexes_tbs;
+-- tablespace indices_tbs;
 
 create index auto_modelo_id_fk on auto(modelo_id)
-tablespace indexes_tbs;
+tablespace indices_tbs;
 
 -- auto probablemente no consulte objeto_id más que en su creación.
 -- create index auto_objeto_id_fk on auto(objeto_id)
--- tablespace indexes_tbs;
+-- tablespace indices_tbs;
 
 -- casa probablemente no consulte objeto_id más que en su creación.
 -- create index casa_objeto_id_fk on casa(objeto_id)
--- tablespace indexes_tbs;
+-- tablespace indices_tbs;
 
 -- banco probablemente contenga menos de 50 registros.
 -- create index cuenta_banco_banco_id_fk on cuenta_banco(banco_id)
--- tablespace indexes_tbs;
+-- tablespace indices_tbs;
 
 create index cuenta_banco_comprador_id_fk on cuenta_banco(comprador_id)
-tablespace indexes_tbs;
+tablespace indices_tbs;
 
 create index tarjeta_comprador_id_fk on tarjeta(comprador_id)
-tablespace indexes_tbs;
+tablespace indices_tbs;
 
 -- factura probablemente consulte tarjeta_id únicamente durante su creación.
 -- create index factura_tarjeta_id_fk on factura(tarjeta_id)
--- tablespace indexes_tbs;
+-- tablespace indices_tbs;
 
 -- factura probablemente consulte tarjeta_id únicamente durante su creación.
 -- create index factura_cuenta_banco_id_fk on factura(cuenta_banco_id)
--- tablespace indexes_tbs;
+-- tablespace indices_tbs;
 
 create index foto_objeto_objeto_id_fk on foto_objeto(objeto_id)
-tablespace indexes_tbs;
+tablespace indices_tbs;
 
 create index historico_status_objeto_objeto_id_fk on historico_status_objeto(objeto_id)
-tablespace indexes_tbs;
+tablespace indices_tbs;
 
 -- status_objeto probablemente contenga menos de 50 registros.
 -- create index historico_status_objeto_status_objeto_id_fk on historico_status_objeto(status_objeto_id)
--- tablespace indexes_tbs;
+-- tablespace indices_tbs;
 
 -- oferta probablemente consulte factura_id únicamente después de su creación, al actualizar el campo.
 -- create index oferta_factura_id_fk on oferta(factura_id)
--- tablespace indexes_tbs;
+-- tablespace indices_tbs;
 
 create index oferta_objeto_id_fk on oferta(objeto_id)
-tablespace indexes_tbs;
+tablespace indices_tbs;
 
 create index oferta_comprador_id_fk on oferta(comprador_id)
-tablespace indexes_tbs;
+tablespace indices_tbs;
 
 create index password_comprador_comprador_id_fk on password_comprador(comprador_id)
-tablespace indexes_tbs;
+tablespace indices_tbs;
