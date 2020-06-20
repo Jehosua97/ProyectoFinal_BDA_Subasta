@@ -9,17 +9,17 @@
 	user system identified by system2
 	
 	logfile group 1 (
-		'$ORACLE_BASE2/oradata/CHJOPROY/redo01a.log',
-		'$ORACLE_BASE2/oradata/CHJOPROY/redo01b.log',
-		'$ORACLE_BASE2/oradata/CHJOPROY/redo01c.log') size 50m blocksize 512,
+		'$ORACLE_BASE2/oradata/CHJOPROY/disk_1/redo01a.log',
+		'$ORACLE_BASE2/oradata/CHJOPROY/disk_2/redo01b.log',
+		'$ORACLE_BASE2/oradata/CHJOPROY/disk_3/redo01c.log') size 50m blocksize 512,
 	group 2 (
-		'$ORACLE_BASE2/oradata/CHJOPROY/redo02a.log',
-		'$ORACLE_BASE2/oradata/CHJOPROY/redo02b.log',
-		'$ORACLE_BASE2/oradata/CHJOPROY/redo02c.log') size 50m blocksize 512,
+		'$ORACLE_BASE2/oradata/CHJOPROY/disk_1/redo02a.log',
+		'$ORACLE_BASE2/oradata/CHJOPROY/disk_2/redo02b.log',
+		'$ORACLE_BASE2/oradata/CHJOPROY/disk_3/redo02c.log') size 50m blocksize 512,
 	group 3 (
-		'$ORACLE_BASE2/oradata/CHJOPROY/redo03a.log',
-		'$ORACLE_BASE2/oradata/CHJOPROY/redo03b.log',
-		'$ORACLE_BASE2/oradata/CHJOPROY/redo03c.log') size 50m blocksize 512
+		'$ORACLE_BASE2/oradata/CHJOPROY/disk_1/redo03a.log',
+		'$ORACLE_BASE2/oradata/CHJOPROY/disk_2/redo03b.log',
+		'$ORACLE_BASE2/oradata/CHJOPROY/disk_3/redo03c.log') size 50m blocksize 512
 	maxloghistory 1
 	maxlogfiles 16
 	maxlogmembers 3
