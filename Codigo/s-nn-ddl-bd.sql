@@ -464,8 +464,6 @@ tablespace indices_tbs;
 -- create index actividad_hacienda_actividad_id_fk on actividad_hacienda(actividad_id)
 -- tablespace indices_tbs;
 
-create index actividad_hacienda_objeto_id_fk on actividad_hacienda(objeto_id, actividad_id)
-tablespace indices_tbs;
 
 -- marca probablemente contenga menos de 50 registros.
 -- create index modelo_marca_id_fk on modelo(marca_id)
