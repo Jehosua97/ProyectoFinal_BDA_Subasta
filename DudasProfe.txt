@@ -1,0 +1,7 @@
+Verificar el tipoobjeto de objeto para que los primeros 100 sean hacienda, despues auto y casa
+Preguntarle al profe como es que quiere que le  entreguemos lso modelos logicos de cada unos de los modulos
+lOS USUARIOS Y LOS MODULOS LA REALACION QUE EXISTE
+LOS TRIGGERS SI SON NECESARIOS CREARLOS
+LOS TIPO BLOB PARA INSERTARLOS
+SI EXISTE UNA MANERA MAS FAIL DE INSERTAR EL NOLOGGIN 
+Como generar la simulacion diaria en un programa o algo asi
