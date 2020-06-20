@@ -1,8 +1,7 @@
 #--@Autores: Chavira Tapia Andrés Uriel
 #--			Joya Venegas Jehosua Alan
 #--@Fecha	19/06/2020
-#--@Descripcion	Configuracion de 2 dispachers y 6 shared_servers para la conexión en modo compartido, estos parámetrso son lso sugeridos
-#-- sin emabargo es bueno hacer una afinación con forme trabaje la BD.
+#--@Descripcion	Configuracion de archivo tnsnames.ora para poder habulitar el compartido y el dedicado, revisar que HOST coincida con el real
 
 cat <<'EOF' >> ${ORACLE_HOME}/network/admin/tnsnames.ora
 CHJOPROY =
