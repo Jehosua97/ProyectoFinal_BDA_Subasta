@@ -21,12 +21,9 @@ ALTER SYSTEM SET log_archive_dest_2='LOCATION=USE_DB_RECOVERY_FILE_DES' SCOPE=sp
 --Configuracion para que el archivo de control y el spfie se guarden en la FRA (Duda: Dice el enunciado "guardar una de las 
 --copias del archivo de control en la FRA, pero en donde mas se guarda las otras copias, y como se hacen ")
 
---A partir de aqui es en la terminar de RMAN
-RMAN TARGET /
-configure controlfile autobackup format for device type disk clear;
-configure controlfile autobackup format for device type disk to '/u01/app/oracle/oradata/CHJOPROY/disk_1/fast-reco-area/ctl_file%F.bkp';
---Configuracion para que los backups set se guarden en la FRA
-configure channel device type disk format '/u01/app/oracle/oradata/CHJOPROY/disk_1/fast-reco-area/backup_%U.bkp' maxpiecesize 1G;
+--Una vez habilitado esto, podemos hacer un backup de prueba para verificar que se encuntre dentro de la FRA, esto desde RMAN
+--backup as backupset incremental level 1 cumulative database
+--	plus archivelog
+--	tag proy_subasta_nivel_1_3;
 
-
-
+--BACKUP LIST;

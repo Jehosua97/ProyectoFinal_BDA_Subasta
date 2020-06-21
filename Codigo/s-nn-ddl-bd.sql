@@ -48,7 +48,7 @@ create table comprador(
     apellido_paterno      varchar2(20)     not null,
     apellido_materno      varchar2(20),
     correo_electronico    varchar2(40)     not null,
-    foto_perfil           blob,
+    foto_perfil           long raw         not null,
     resenia               varchar2(40)     not null,
     usuario               varchar2(20)     not null,
     rfc                   varchar2(13)     not null,
