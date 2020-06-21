@@ -11,7 +11,7 @@
 --mkdir -p $ORACLE_BASE2/oradata/CHJOPROY/disk_1/fast-reco-area
 
 
---RMAN TARGET /
+--rman target /
 
 --Formato y ruta de donde se almacenarán los bakcups del control file
 configure controlfile autobackup format for device type disk clear;
@@ -21,13 +21,13 @@ configure controlfile autobackup format for device type disk to '/u01/app/oracle
 configure channel device type disk format '/u01/app/oracle/oradata/CHJOPROY/disk_1/fast-reco-area/backup_%U.bkp' maxpiecesize 2G;
 
 --Desde RMAN para especificar cuantos backups deben ser conservados, en este caso vamos a configurarlo a dos
-configure retention policy to redundancy 1
+configure retention policy to redundancy 1;
 
 --Eliminar todos los archive redo logs tanto de la FRA como de ubicaciones externas cuando los archive redo logs han sido respaldados al menos 2 veces en disco
 configure archivelog deletion policy to backed up 1 times to disk;
 
 --Tratamos de optimizar el trabajo de backup cuando estas ya han sido respaldados antes
-configure backup optimization on
+configure backup optimization on;
 
 --Creacion del primer backup desde RMAN
 backup database plus archivelog tag autos_full_inicial;
