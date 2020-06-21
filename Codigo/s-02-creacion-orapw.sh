@@ -10,7 +10,7 @@ echo "Cambiando la varible ORACLE_SID=chjoproy"
 export ORACLE_SID=chjoproy
 #Creacion del archivo de password con comando orapwd
 echo "Creando archivos de password"
-orapwd FILE='$ORACLE_BASE2/oradata/CHJOPROY/disk_1/dbs/orapwchjoproy' \
+orapwd FILE='$ORACLE_HOME/dbs/orapwchjoproy' \
 	FORCE=y \
 	SYS=password \
 	SYSBACKUP=password
