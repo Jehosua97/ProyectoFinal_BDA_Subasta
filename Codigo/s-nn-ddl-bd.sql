@@ -57,7 +57,7 @@ create table comprador(
         constraint comprador_rfc_uk unique,
     direccion             varchar2(40)     not null,
     pais_id               number(10, 0)    not null,
-    aval_id               number(10, 0)    not null,
+    aval_id               number(10, 0),
     constraint comprador_pk primary key (comprador_id)
     using index (
         create unique index comprador_pk on comprador(comprador_id)
@@ -540,3 +540,26 @@ tablespace indices_tbs;
 
 create index password_comprador_comprador_id_fk on password_comprador(comprador_id)
 tablespace indices_tbs;
+
+
+
+-- drop table password_comprador;
+-- drop table oferta;
+-- drop table historico_status_objeto;
+-- drop table foto_objeto;
+-- drop table factura;
+-- drop table tarjeta;
+-- drop table cuenta_banco;
+-- drop table casa;
+-- drop table banco;
+-- drop table auto;
+-- drop table modelo;
+-- drop table marca;
+-- drop table actividad_hacienda;
+-- drop table hacienda;
+-- drop table objeto;
+-- drop table status_objeto;
+-- drop table subasta;
+-- drop table comprador;
+-- drop table pais;
+-- drop table actividad;
