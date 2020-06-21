@@ -1,3 +1,8 @@
+--@Autores: Chavira Tapia Andrés Uriel
+--			Joya Venegas Jehosua Alan
+--@Fecha	20/06/2020
+--@Descripcion: Población de tablas
+
 --TABLA ACTIVIDAD
 INSERT INTO actividad (actividad_id, descripcion) VALUES (1,'Agricultura');
 INSERT INTO actividad (actividad_id, descripcion) VALUES (2,'Ganaderia');
