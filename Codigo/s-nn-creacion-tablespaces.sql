@@ -19,7 +19,7 @@ create tablespace compradores_tbs
 
 --Tablespace de subastas
 prompt Creando tablespace de subastas
-create tablespace objetos_tbs
+create tablespace subastas_tbs
 	datafile '$ORACLE_BASE/oradata/CHJOPROY/subastas_tbs.dbf' size 300m
 	extent management local autoallocate
 	segment space management auto;

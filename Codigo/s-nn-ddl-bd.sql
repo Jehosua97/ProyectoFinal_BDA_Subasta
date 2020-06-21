@@ -14,7 +14,7 @@ create table actividad(
     constraint actividad_pk primary key (actividad_id)
     using index (
         create unique index actividad_pk on actividad(actividad_id)
-        tablespace indices_tbs
+        tablespace indices_tbs)
 )tablespace objetos_tbs
 ;
 
@@ -33,7 +33,7 @@ create table pais(
     using index (
         create unique index pais_pk on pais(pais_id)
         tablespace indices_tbs
-    ),
+    )
 )tablespace compradores_tbs
 ;
 
@@ -52,7 +52,7 @@ create table comprador(
     foto_perfil           blob,
     resenia               varchar2(40)     not null,
     usuario               varchar2(20)     not null
-        contraint comprador_usuario_uk unique,
+        constraint comprador_usuario_uk unique,
     rfc                   varchar2(13)     not null
         constraint comprador_rfc_uk unique,
     direccion             varchar2(40)     not null,
@@ -98,8 +98,7 @@ create table subasta(
 --
 
 create table status_objeto(
-    status_objeto_id    number(10, 0)    not null
-                        constraint clave_ck check (status_objeto_id disp, comp, entr, desc),
+    status_objeto_id    number(10, 0)    not null,
     clave               char(4)          not null,
     descripcion         varchar2(40)     not null,
     constraint status_objeto_pk primary key (status_objeto_id)
@@ -107,7 +106,7 @@ create table status_objeto(
         create unique index status_objeto_pk on status_objeto(status_objeto_id)
         tablespace indices_tbs
     )
-)tablespace archivo_tbs
+)tablespace historico_tbs
 ;
 
 
@@ -137,7 +136,7 @@ create table objeto(
     constraint objeto_subasta_id_fk foreign key (subasta_id)
     references subasta(subasta_id),
     constraint objeto_status_objeto_id_fk foreign key (status_objeto_id)
-    references status_objeto(status_objeto_id)
+    references status_objeto(status_objeto_id),
     constraint objeto_tipo_objeto_ck check (tipo_objeto IN('1','2','3'))
 )tablespace objetos_tbs
 ;
@@ -197,6 +196,7 @@ create table marca(
     using index (
         create unique index marca_pk on marca(marca_id)
         tablespace indices_tbs
+    )
 )tablespace objetos_tbs
 ;
 
@@ -213,7 +213,8 @@ create table modelo(
     constraint modelo_pk primary key (modelo_id)
     using index (
         create unique index modelo_pk on modelo(modelo_id)
-        tablespace indices_tbs, 
+        tablespace indices_tbs
+    ), 
     constraint modelo_marca_id_fk foreign key (marca_id)
     references marca(marca_id)
 )tablespace objetos_tbs
@@ -234,7 +235,8 @@ create table auto(
     constraint auto_pk primary key (objeto_id)
     using index (
         create unique index auto_pk on auto(objeto_id)
-        tablespace indices_tbs, 
+        tablespace indices_tbs
+    ), 
     constraint auto_modelo_id_fk foreign key (modelo_id)
     references modelo(modelo_id),
     constraint auto_objeto_id_fk foreign key (objeto_id)
@@ -258,6 +260,7 @@ create table banco(
     using index (
         create unique index banco_pk on banco(banco_id)
         tablespace indices_tbs
+    )
 )tablespace compradores_tbs
 ;
 
@@ -276,7 +279,8 @@ create table casa(
     constraint casa_pk primary key (objeto_id)
     using index (
         create unique index casa_pk on casa(objeto_id)
-        tablespace indices_tbs, 
+        tablespace indices_tbs
+    ), 
     constraint casa_objeto_id_fk foreign key (objeto_id)
     references objeto(objeto_id)
 )tablespace objetos_tbs
@@ -297,7 +301,8 @@ create table cuenta_banco(
     constraint cuenta_banco_pk primary key (cuenta_banco_id)
     using index (
         create unique index cuenta_banco_pk on cuenta_banco(cuenta_banco_id)
-        tablespace indices_tbs, 
+        tablespace indices_tbs
+    ), 
     constraint cuenta_banco_banco_id_fk foreign key (banco_id)
     references banco(banco_id),
     constraint cuenta_banco_comprador_id_fk foreign key (comprador_id)
@@ -314,17 +319,17 @@ create table cuenta_banco(
 create table tarjeta(
     tarjeta_id         number(10, 0)    not null,
     numero             number(16, 0)    not null,
-    tipo_tarjeta       varchar2(8)      not null
-                       
+    tipo_tarjeta       varchar2(8)      not null,              
     mes_expiracion     number(2, 0)     not null,
     anio_expiracion    number(2, 0)     not null,
     comprador_id       number(10, 0)    not null,
     constraint tarjeta_pk primary key (tarjeta_id)
     using index (
         create unique index tarjeta_pk on tarjeta(tarjeta_id)
-        tablespace indices_tbs, 
+        tablespace indices_tbs
+    ), 
     constraint tarjeta_comprador_id_fk foreign key (comprador_id)
-    references comprador(comprador_id)
+    references comprador(comprador_id),
     constraint tarjeta_tipo_tarjeta_ck check (tipo_tarjeta IN ('debito', 'credito'))
 )tablespace compradores_tbs
 ;
@@ -347,7 +352,8 @@ create table factura(
     constraint factura_pk primary key (factura_id)
     using index (
         create unique index factura_pk on factura(factura_id)
-        tablespace indices_tbs, 
+        tablespace indices_tbs
+    ), 
     constraint factura_tarjeta_id_fk foreign key (tarjeta_id)
     references tarjeta(tarjeta_id),
     constraint factura_cuenta_banco_id_fk foreign key (cuenta_banco_id)
@@ -368,7 +374,8 @@ create table foto_objeto(
     constraint foto_objeto_pk primary key (foto_objeto_id)
     using index (
         create unique index foto_objeto_pk on foto_objeto(foto_objeto_id)
-        tablespace indices_tbs, 
+        tablespace indices_tbs
+    ), 
     constraint foto_objeto_objeto_id_fk foreign key (objeto_id)
     references objeto(objeto_id)
 )LOB(foto) store as basicfile(tablespace indices_blob_tbs)
@@ -389,12 +396,13 @@ create table historico_status_objeto(
     constraint historico_status_objeto_pk primary key (historico_status_objeto_id)
     using index (
         create unique index historico_status_objeto_pk on historico_status_objeto(historico_status_objeto_id)
-        tablespace indices_tbs, 
+        tablespace indices_tbs
+    ), 
     constraint historico_status_objeto_objeto_id_fk foreign key (objeto_id)
     references objeto(objeto_id),
     constraint historico_status_objeto_status_objeto_id_fk foreign key (status_objeto_id)
     references status_objeto(status_objeto_id)
-)tablespace archivo_tbs
+)tablespace historico_tbs
 ;
 
 
@@ -413,7 +421,8 @@ create table oferta(
     constraint oferta_pk primary key (oferta_id)
     using index (
         create unique index oferta_pk on oferta(oferta_id)
-        tablespace indices_tbs, 
+        tablespace indices_tbs
+    ), 
     constraint oferta_factura_id_fk foreign key (factura_id)
     references factura(factura_id),
     constraint oferta_objeto_id_fk foreign key (objeto_id)
@@ -436,7 +445,8 @@ create table password_comprador(
     constraint password_comprador_pk primary key (password_comprador_id)
     using index (
         create unique index password_comprador_pk on password_comprador(password_comprador_id)
-        tablespace indices_tbs, 
+        tablespace indices_tbs
+    ), 
     constraint password_comprador_comprador_id_fk foreign key (comprador_id)
     references comprador(comprador_id)
 )tablespace compradores_tbs
