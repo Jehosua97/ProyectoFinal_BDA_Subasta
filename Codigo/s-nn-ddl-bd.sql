@@ -63,9 +63,9 @@ create table comprador(
         create unique index comprador_pk on comprador(comprador_id)
         tablespace indices_tbs
     ), 
-    constraint pais_pais_id_fk foreign key (pais_id)
+    constraint comprador_pais_id_fk foreign key (pais_id)
     references pais(pais_id),
-    constraint pais_aval_id_fk foreign key (aval_id)
+    constraint comprador_aval_id_fk foreign key (aval_id)
     references comprador(comprador_id)
 )LOB(foto_perfil) store as basicfile(tablespace indices_blob_tbs)
 tablespace compradores_tbs
@@ -272,8 +272,8 @@ create table banco(
 
 create table casa(
     objeto_id          number(10, 0)    not null,
-    latitud            number(2, 2)     not null,
-    longitud           number(2, 2)     not null,
+    latitud            number(4, 2)     not null,
+    longitud           number(4, 2)     not null,
     direccion          varchar2(40)     not null,
     caracteristicas    varchar2(40)     not null,
     constraint casa_pk primary key (objeto_id)
