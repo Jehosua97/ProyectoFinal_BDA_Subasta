@@ -3,21 +3,20 @@
 --@Fecha  22/06/2020
 --@Descripcion  Creacion de usuarios para cada modulo
 
-create user user_objetos identified by user_objetos
+create user u_obj identified by u_obj
   default tablespace objetos_tbs
   quota unlimited on objetos_tbs
   quota unlimited on historico_tbs
   quota unlimited on fotos_tbs;
 
 grant create table, create session, create procedure, 
-	create sequence to user_objetos;
+  create sequence, select any table to u_obj;
 
 
-create user user_usuarios identified by mosaproy_recursos
+create user u_obj identified by u_usr
   default tablespace compradores_tbs
+  quota unlimited on compradores_tbs
   quota unlimited on subastas_tbs;
 
-
 grant create table, create session, create procedure, 
-	create sequence to user_usuarios;
-
+  create sequence, select any table to u_usr;
