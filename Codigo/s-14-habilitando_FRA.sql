@@ -12,7 +12,7 @@
 --Creacion de pfile de respaldo en caso de una tragedia
 create pfile='/u01/app/oracle/oradata/CHJOPROY/disk_1/dbs/initchjoproy.ora.sinFRA' from spfile;
 --Modificando los parámetros necesarios
-ALTER SYSTEM SET db_recovery_file_dest_size = 2065M SCOPE=BOTH;
+ALTER SYSTEM SET db_recovery_file_dest_size = 1234M SCOPE=BOTH;
 ALTER SYSTEM SET db_recovery_file_dest='/u01/app/oracle/oradata/CHJOPROY/disk_1/fast-reco-area' scope=both;
 --Se garantiza que la base de datos se recupera al estado anterior en un periodo maximo de un dia, esto debido a la capacidad de memoria disponnible
 ALTER SYSTEM SET db_flashback_retention_target = 1440 SCOPE=BOTH;

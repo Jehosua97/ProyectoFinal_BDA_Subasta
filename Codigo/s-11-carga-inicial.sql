@@ -4721,6 +4721,6 @@ alter table hacienda logging;
 alter table objeto logging;
 alter table status_objeto logging;
 alter table subasta logging;
-alter table comprador ogging;
+alter table comprador logging;
 alter table pais logging;
 alter table actividad logging;
