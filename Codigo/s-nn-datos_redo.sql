@@ -5,39 +5,50 @@
 set serveroutput on;
 whenever sqlerror exit rollback
 
+--------------------------------------------------
+-------- Redo para la tabla CASA y OBJETO-------------------
+---------------------------------------------------
 declare
-  v_count number;
+j integer := 11;
+k integer := 31;
+m integer := 8;
+l integer := 11;
+u integer := 201;
+q integer := 201;
+i integer;
 
-    cursor cur_insert is
-	 	select comprador.comprador_id as id,
-			comprador.nombre as name,
-			comprador.apellido_paterno as ap_pa,
-			comprador.apellido_materno as ap_ma
-			comprador.correo_electronico as email,
-			comprador.foto_perfil as foto,
-			comprador.resenia as r,
-			comprador.usuario as user,
-			comprador.rfc as unique,
- 			comprador.direccion as address,
- 			comprador.pais_id as country
- 			cuenta_banco.clabe as clabe
-    	from comprador 
-    	inner join cuenta_banco
-    	where comprador.comprador_id <=500
-    	order by cuenta_banco.clabe desc;
+begin 
+    for i in 1..6000 loop      
+      
+      insert into marca (marca_id, nombre) values (j, dbms_random.string('A',40));
+      insert into modelo (modelo_id, nombre, marca_id) values (k, dbms_random.string('A',40), 6);
+      INSERT INTO actividad (actividad_id, descripcion) VALUES (m, dbms_random.string('A',40));
+      insert into foto_objeto (foto_objeto_id, foto, objeto_id) values (u, '529a8146347f751943529a189c98571d75d56f9e47617f4524957b330bc1ab73', 2);
+      insert into historico_status_objeto (historico_status_objeto_id, fecha_status, objeto_id, status_objeto_id) values (q,  sysdate, 297, 3);    
+      j := j +1;
+      k := k +1;
+      m := m +1;
+      u := u +1;
+      q := q +1;
+    end loop;
+end;
+/
 
--- insert
-   v_count := 0;
-  for r in cur_insert loop
-    insert into auto (auto_id, marca,modelo,anio,num_serie,tipo,precio,
-      descuento,foto,fecha_status,status_auto_id,agencia_id,cliente_id)
-    values(r.auto_id, r.marca,r.modelo,r.anio,r.num_serie,r.tipo,r.precio,
-      r.descuento,r.foto,r.fecha_status,r.status_auto_id,r.agencia_id,
-      r.cliente_id);
-    v_count := v_count + sql%rowcount;
-  end loop;
+commit;
 
-  dbms_output.put_line('Registros insertados en AUTO: '||v_count);
+delete from marca where marca_id > 10;
+delete from modelo where modelo_id > 30;
+delete from actividad where actividad_id > 7;
+delete from foto_objeto where foto_objeto_id > 200;
+delete from historico_status_objeto where historico_status_objeto_id > 200;
 
-  select max(password_comprador_id) from password_comprador;
-  select max(password_comprador_id) from ;
+commit;
+
+select comprador.comprador_id,
+  cuenta_banco.clabe
+  from comprador
+  join cuenta_banco on comprador.comprador_id = cuenta_banco.comprador_id
+  order by cuenta_banco.clabe;
+select max(password_comprador_id) from password_comprador;
+
+
