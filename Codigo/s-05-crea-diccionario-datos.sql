@@ -1,7 +1,7 @@
 --@Autores: Chavira Tapia Andrés Uriel
 --			Joya Venegas Jehosua Alan
 --@Fecha	18/06/2020
---@Descripcion	Creacion de diccionario de datos, este script suele tardar alrrededor de 30 minutos
+--@Descripcion	Creacion de diccionario de datos, este script suele tardar alrrededor de 30 minutos.
 Prompt SYS:
 conn sys as sysdba
 Prompt catalog.sql
