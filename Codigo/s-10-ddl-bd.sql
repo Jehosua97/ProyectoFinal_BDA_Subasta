@@ -9,7 +9,7 @@
 -- table: actividad 
 --
 
-create table actividad(
+create table user_objeto.actividad(
     actividad_id             number(10, 0)    not null,
     descripcion              varchar2(40)     not null,
     constraint actividad_pk primary key (actividad_id)
@@ -25,7 +25,7 @@ create table actividad(
 -- table: pais 
 --
 
-create table pais(
+create table user_usuarios.pais(
     pais_id        number(10, 0)    not null,
     clave          char(2)          not null
         constraint pais_clave_uk unique,
@@ -44,7 +44,7 @@ create table pais(
 -- table: comprador 
 --
 
-create table comprador(
+create table user_usuarios.comprador(
     comprador_id          number(10, 0)    not null,
     nombre                varchar2(20)     not null,
     apellido_paterno      varchar2(20)     not null,
@@ -78,7 +78,7 @@ tablespace compradores_tbs
 -- table: subasta 
 --
 
-create table subasta(
+create table user_usuarios.subasta(
     subasta_id              number(10, 0)    not null,
     fecha                   date             not null,
     direccion_internet      varchar2(40)     not null,
@@ -98,7 +98,7 @@ create table subasta(
 -- table: status_objeto 
 --
 
-create table status_objeto(
+create table user_objeto.status_objeto(
     status_objeto_id    number(10, 0)    not null,
     clave               char(4)          not null,
     descripcion         varchar2(40)     not null,
@@ -116,12 +116,13 @@ create table status_objeto(
 -- table: objeto 
 --
 
-create table objeto(
+create table user_objeto.objeto(
     objeto_id                number(10, 0)    not null,
     nombre                   varchar2(40)     not null,
     descripcion              varchar2(40)     not null,
     precio_inicial           number(12, 0)    not null,
-    codigo_barras            number(14, 0)    not null,
+    codigo_barras            number(14, 0)    not null
+        constraint objeto_codigo_barras unique,
     fecha_status             date             not null,
     tipo_objeto              char(1)          not null,
     propietario_objeto_id    number(10, 0),
@@ -148,7 +149,7 @@ create table objeto(
 -- table: hacienda 
 --
 
-create table hacienda(
+create table user_objeto.hacienda(
     objeto_id             number(10, 0)    not null,
     nombre                varchar2(40)     not null,
     extension_km_2        number(10, 2)    not null,
@@ -169,7 +170,7 @@ create table hacienda(
 -- table: actividad_hacienda 
 --
 
-create table actividad_hacienda(
+create table user_objeto.actividad_hacienda(
     objeto_id       number(10, 0)    not null,
     actividad_id    number(10, 0)    not null,
     constraint actividad_hacienda_pk primary key (objeto_id, actividad_id)
@@ -190,7 +191,7 @@ create table actividad_hacienda(
 -- table: marca 
 --
 
-create table marca(
+create table user_objeto.marca(
     marca_id        number(10, 0)    not null,
     nombre          varchar2(40)     not null,
     constraint marca_pk primary key (marca_id)
@@ -207,7 +208,7 @@ create table marca(
 -- table: modelo 
 --
 
-create table modelo(
+create table user_objeto.modelo(
     modelo_id        number(10, 0)    not null,
     nombre           varchar2(40)     not null,
     marca_id         number(10, 0)    not null,
@@ -227,7 +228,7 @@ create table modelo(
 -- table: auto 
 --
 
-create table auto(
+create table user_objeto.auto(
     objeto_id       number(10, 0)    not null,
     anio            number(4, 0)     not null,
     num_serie       varchar2(40)     not null,
@@ -251,7 +252,7 @@ create table auto(
 -- table: banco 
 --
 
-create table banco(
+create table user_usuarios.banco(
     banco_id             number(10, 0)    not null,
     clave                char(4)          not null
         constraint banco_clave_uk unique,
@@ -271,7 +272,7 @@ create table banco(
 -- table: casa 
 --
 
-create table casa(
+create table user_objeto.casa(
     objeto_id          number(10, 0)    not null,
     latitud            number(4, 2)     not null,
     longitud           number(4, 2)     not null,
@@ -293,7 +294,7 @@ create table casa(
 -- table: cuenta_banco 
 --
 
-create table cuenta_banco(
+create table user_usuarios.cuenta_banco(
     cuenta_banco_id    number(10, 0)    not null,
     clabe              number(18, 0)    not null
         constraint cuenta_banco_clabe_uk unique,
@@ -317,7 +318,7 @@ create table cuenta_banco(
 -- table: tarjeta 
 --
 
-create table tarjeta(
+create table user_usuarios.tarjeta(
     tarjeta_id         number(10, 0)    not null,
     numero             number(16, 0)    not null,
     tipo_tarjeta       varchar2(8)      not null,              
@@ -341,7 +342,7 @@ create table tarjeta(
 -- table: factura 
 --
 
-create table factura(
+create table user_usuarios.factura(
     factura_id          number(10, 0)    not null,
     folio               number(10, 0)    not null
         constraint factura_folio_uk unique,
@@ -368,7 +369,7 @@ create table factura(
 -- table: foto_objeto 
 --
 
-create table foto_objeto(
+create table user_objeto.foto_objeto(
     foto_objeto_id    number(10, 0)    not null,
     foto              blob             not null,
     objeto_id         number(10, 0)    not null,
@@ -389,7 +390,7 @@ tablespace fotos_tbs
 -- table: historico_status_objeto 
 --
 
-create table historico_status_objeto(
+create table user_objeto.historico_status_objeto(
     historico_status_objeto_id    number(10, 0)    not null,
     fecha_status                  date             not null,
     objeto_id                     number(10, 0)    not null,
@@ -412,7 +413,7 @@ create table historico_status_objeto(
 -- table: oferta 
 --
 
-create table oferta(
+create table user_usuarios.oferta(
     oferta_id        number(10, 0)    not null,
     fecha            date             not null,
     precio           number(10, 0)    not null,
@@ -439,7 +440,7 @@ create table oferta(
 -- table: password_comprador 
 --
 
-create table password_comprador(
+create table user_usuarios.password_comprador(
     password_comprador_id    number(10, 0)    not null,
     password                 varchar2(20)     not null,
     comprador_id             number(10, 0),
@@ -454,23 +455,23 @@ create table password_comprador(
 ;
 
 --Índices UNIQUE
-create unique index comprador_correo_electronico_iuk on comprador(correo_electronico)
+create unique index comprador_correo_electronico_iuk on user_usuarios.comprador(correo_electronico)
 tablespace indices_tbs;
 
-create unique index auto_num_serie_iuk on auto(num_serie)
+create unique index auto_num_serie_iuk on user_objetos.auto(num_serie)
 tablespace indices_tbs;
 
 --Índices FK (NONUNIQUE)
-create index comprador_pais_id_fk on comprador(pais_id)
+create index comprador_pais_id_fk on user_usuarios.comprador(pais_id)
 tablespace indices_tbs;
 
-create index comprador_aval_id_fk on comprador(aval_id)
+create index comprador_aval_id_fk on user_usuarios.comprador(aval_id)
 tablespace indices_tbs;
 
-create index objeto_propietario_objeto_id_fk on objeto(propietario_objeto_id)
+create index objeto_propietario_objeto_id_fk on user_objetos.objeto(propietario_objeto_id)
 tablespace indices_tbs;
 
-create index objeto_subasta_id_fk on objeto(subasta_id)
+create index objeto_subasta_id_fk on user_objetos.objeto(subasta_id)
 tablespace indices_tbs;
 
 -- status_objeto probablemente contenga menos de 50 registros.
@@ -490,7 +491,7 @@ tablespace indices_tbs;
 -- create index modelo_marca_id_fk on modelo(marca_id)
 -- tablespace indices_tbs;
 
-create index auto_modelo_id_fk on auto(modelo_id)
+create index auto_modelo_id_fk on user_objetos.auto(modelo_id)
 tablespace indices_tbs;
 
 -- auto probablemente no consulte objeto_id más que en su creación.
@@ -505,10 +506,10 @@ tablespace indices_tbs;
 -- create index cuenta_banco_banco_id_fk on cuenta_banco(banco_id)
 -- tablespace indices_tbs;
 
-create index cuenta_banco_comprador_id_fk on cuenta_banco(comprador_id)
+create index cuenta_banco_comprador_id_fk on user_usuarios.cuenta_banco(comprador_id)
 tablespace indices_tbs;
 
-create index tarjeta_comprador_id_fk on tarjeta(comprador_id)
+create index tarjeta_comprador_id_fk on user_usuarios.tarjeta(comprador_id)
 tablespace indices_tbs;
 
 -- factura probablemente consulte tarjeta_id únicamente durante su creación.
@@ -519,10 +520,10 @@ tablespace indices_tbs;
 -- create index factura_cuenta_banco_id_fk on factura(cuenta_banco_id)
 -- tablespace indices_tbs;
 
-create index foto_objeto_objeto_id_fk on foto_objeto(objeto_id)
+create index foto_objeto_objeto_id_fk on user_objetos.foto_objeto(objeto_id)
 tablespace indices_tbs;
 
-create index historico_status_objeto_objeto_id_fk on historico_status_objeto(objeto_id)
+create index historico_status_objeto_objeto_id_fk on user_objetos.historico_status_objeto(objeto_id)
 tablespace indices_tbs;
 
 -- status_objeto probablemente contenga menos de 50 registros.
@@ -533,13 +534,13 @@ tablespace indices_tbs;
 -- create index oferta_factura_id_fk on oferta(factura_id)
 -- tablespace indices_tbs;
 
-create index oferta_objeto_id_fk on oferta(objeto_id)
+create index oferta_objeto_id_fk on user_usuarios.oferta(objeto_id)
 tablespace indices_tbs;
 
-create index oferta_comprador_id_fk on oferta(comprador_id)
+create index oferta_comprador_id_fk on user_usuarios.oferta(comprador_id)
 tablespace indices_tbs;
 
-create index password_comprador_comprador_id_fk on password_comprador(comprador_id)
+create index password_comprador_comprador_id_fk on user_usuarios.password_comprador(comprador_id)
 tablespace indices_tbs;
 
 
