@@ -17,9 +17,18 @@ ALTER SYSTEM SET db_recovery_file_dest='/u01/app/oracle/oradata/CHJOPROY/disk_1/
 --Se garantiza que la base de datos se recupera al estado anterior en un periodo maximo de un dia, esto debido a la capacidad de memoria disponnible
 ALTER SYSTEM SET db_flashback_retention_target = 1440 SCOPE=BOTH;
 --LA segunda copia de los archive redo log almacenada en la FRA
-ALTER SYSTEM SET log_archive_dest_2='LOCATION=USE_DB_RECOVERY_FILE_DES' SCOPE=spfile;
+--ALTER SYSTEM SET log_archive_dest_2='LOCATION=USE_DB_RECOVERY_FILE_DES' SCOPE=spfile;
+shutdown immediate;
+startup;
 --Configuracion para que el archivo de control y el spfie se guarden en la FRA (Duda: Dice el enunciado "guardar una de las 
 --copias del archivo de control en la FRA, pero en donde mas se guarda las otras copias, y como se hacen ")
+
+--Formato y ruta de donde se almacenarán los bakcups del control file
+configure controlfile autobackup format for device type disk clear;
+configure controlfile autobackup format for device type disk to '/u01/app/oracle/oradata/CHJOPROY/disk_1/fast-reco-area/ctl_file%F.bkp';
+
+configure channel device type disk format '/u01/app/oracle/oradata/CHJOPROY/disk_1/fast-reco-area/backup_%U.bkp' maxpiecesize 2G;
+
 
 --Una vez habilitado esto, podemos hacer un backup de prueba para verificar que se encuntre dentro de la FRA, esto desde RMAN
 --backup as backupset incremental level 1 cumulative database

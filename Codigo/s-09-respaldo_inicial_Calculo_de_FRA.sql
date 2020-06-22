@@ -3,7 +3,7 @@
 --@Fecha	20/06/2020
 --@Descripcion: Configuracion de parámetros necesarios para la configuracion de respaldos
 --Se van a crear backups nivel cero todos los dias lunes,ya que la oficina de subastas se encuentra cerrada ese día, así mismo 
---se van a generar backups incrementales diferenciales nivel 1 cada día a las 3:00 am, ya que se sabe que el nivel de movimientos
+--se van a generar backups incrementales cumulativo nivel 1 cada día a las 3:00 am, ya que se sabe que el nivel de movimientos
 -- en ese horario es bajo, los respaldos estarán ubicados dentro de la FRA (/u01/app/oracle/oradata/CHJOPROY/disk_1/fast-reco-area/)
 --debido al espacio en disco con el que se cuneta en la base de daos se tendrá una política de retención de 1 backups, el tamaño
 -- total en disco disponible para almacenar estos backups será el que nos arroje la FRA
@@ -12,10 +12,6 @@
 
 
 --rman target /
-
---Formato y ruta de donde se almacenarán los bakcups del control file
-configure controlfile autobackup format for device type disk clear;
-configure controlfile autobackup format for device type disk to '/u01/app/oracle/oradata/CHJOPROY/disk_1/fast-reco-area/ctl_file%F.bkp';
 
 --Indicandole que se harán los respaldos en disco y declarando la ruta
 configure channel device type disk format '/u01/app/oracle/oradata/CHJOPROY/disk_1/fast-reco-area/backup_%U.bkp' maxpiecesize 2G;
@@ -75,9 +71,7 @@ backup as backupset incremental level 1 cumulative database
 --EJECUTAR NUEVAMENTE EL SCRIPT DE CARGA DIARIA 
 
 --Creando un bakcup incremental diferencial nivel 1
-backup as backupset incremental level 1 cumulative database
-	plus archivelog
-	tag proy_subasta_nivel_1_2;
+backup as backupset incremental level 1 cumulative database plus archivelog tag proy_subasta_nivel_1_2;
 
 --select session_key,bs_key,
 --		status,start_time,
