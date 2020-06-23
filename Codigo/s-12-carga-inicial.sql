@@ -4,6 +4,7 @@
 --@Descripcion: Población de tablas
 
 --TABLA ACTIVIDAD
+conn u_obj/u_obj
 INSERT INTO actividad (actividad_id, descripcion) VALUES (1,'Agricultura');
 INSERT INTO actividad (actividad_id, descripcion) VALUES (2,'Ganaderia');
 INSERT INTO actividad (actividad_id, descripcion) VALUES (3,'Comercio');
@@ -12,6 +13,8 @@ INSERT INTO actividad (actividad_id, descripcion) VALUES (5,'Pesca');
 INSERT INTO actividad (actividad_id, descripcion) VALUES (6,'Caza');
 INSERT INTO actividad (actividad_id, descripcion) VALUES (7,'Reventa');
 --TABLA PAIS
+disc
+conn u_usr/u_usr
 insert into pais (pais_id, clave, nombre) values (1, 'ID', 'Indonesia');
 insert into pais (pais_id, clave, nombre) values (2, 'SE', 'Sweden');
 insert into pais (pais_id, clave, nombre) values (3, 'US', 'United States');
@@ -1135,6 +1138,8 @@ insert into subasta (subasta_id, fecha, direccion_internet, recaduacion_estimada
 insert into subasta (subasta_id, fecha, direccion_internet, recaduacion_estimada) values (99, to_date('2020-02-09 04:34:12', 'YYYY-MM-DD HH24:MI:SS'), 'https://mit.edu', 40063);
 insert into subasta (subasta_id, fecha, direccion_internet, recaduacion_estimada) values (100, to_date('2019-07-21 08:26:54', 'YYYY-MM-DD HH24:MI:SS'), 'https://phoca.cz', 765472);
 --status_objeto
+disc
+conn u_obj/u_obj
 insert into status_objeto (status_objeto_id, clave, descripcion) values (1, 'ST00', 'Disponible');
 insert into status_objeto (status_objeto_id, clave, descripcion) values (2, 'ST01', 'Vendido');
 insert into status_objeto (status_objeto_id, clave, descripcion) values (3, 'ST02', 'En Subasta');
@@ -1785,6 +1790,8 @@ insert into auto (objeto_id, anio, num_serie, no_cilindros, modelo_id) values (1
 insert into auto (objeto_id, anio, num_serie, no_cilindros, modelo_id) values (199, 2001, '770-97-3451', 2, 26);
 insert into auto (objeto_id, anio, num_serie, no_cilindros, modelo_id) values (200, 2011, '868-85-8268', 2, 24);
 --BANCO
+disc
+conn u_usr/u_usr
 insert into banco (banco_id, clave, descripcion, nombre) values (1, 'GR', 'target cross-platform initiatives', 'Solarbreeze');
 insert into banco (banco_id, clave, descripcion, nombre) values (2, 'CS', 'benchmark leading-edge niches', 'Fix San');
 insert into banco (banco_id, clave, descripcion, nombre) values (3, 'ET', 'envisioneer open-source supply-chains', 'Regrant');
@@ -1796,6 +1803,8 @@ insert into banco (banco_id, clave, descripcion, nombre) values (8, 'US', 'empow
 insert into banco (banco_id, clave, descripcion, nombre) values (9, 'PH', 'extend value-added mindshare', 'Kanlam');
 insert into banco (banco_id, clave, descripcion, nombre) values (10, 'CN', 'visualize out-of-the-box web-readiness', 'Home Ing');
 --CASA
+disc
+conn u_obj/u_obj
 insert into casa (objeto_id, latitud, longitud, direccion, caracteristicas) values (201, 21.63, 53.99, '7 Gina Junction', 'optimize bricks-and-clicks portals');
 insert into casa (objeto_id, latitud, longitud, direccion, caracteristicas) values (202, 6.61, 50.62, '86 Orin Pass', 'architect B2B relationships');
 insert into casa (objeto_id, latitud, longitud, direccion, caracteristicas) values (203, 50.95, 8.42, '1 Schiller Road', 'syndicate strategic networks');
@@ -1897,6 +1906,8 @@ insert into casa (objeto_id, latitud, longitud, direccion, caracteristicas) valu
 insert into casa (objeto_id, latitud, longitud, direccion, caracteristicas) values (299, 25.82, 70.93, '8156 Raven Junction', 'orchestrate dynamic channels');
 insert into casa (objeto_id, latitud, longitud, direccion, caracteristicas) values (300, 57.95, 82.97, '2 Bartillon Crossing', 'brand integrated platforms');
 --cuenta_banco
+disc
+conn u_usr/u_usr
 insert into cuenta_banco (cuenta_banco_id, clabe, comprador_id, banco_id) values (1,  349230432, 1, 3);
 insert into cuenta_banco (cuenta_banco_id, clabe, comprador_id, banco_id) values (2,  536526018, 2, 8);
 insert into cuenta_banco (cuenta_banco_id, clabe, comprador_id, banco_id) values (3,  824186576, 3, 3);
@@ -3100,6 +3111,8 @@ insert into factura (factura_id, folio, fecha, monto_total, iva, cuenta_banco_id
 insert into factura (factura_id, folio, fecha, monto_total, iva, cuenta_banco_id) values (199, 199, to_date('2019-10-31 17:50:21', 'YYYY-MM-DD HH24:MI:SS'), 329204, 52672.64, 302);
 insert into factura (factura_id, folio, fecha, monto_total, iva, cuenta_banco_id) values (200, 200, to_date('2020-04-04 17:16:56', 'YYYY-MM-DD HH24:MI:SS'), 776494, 124239.04, 323);
 --Foto_objeto
+disc
+conn u_obj/u_obj
 insert into foto_objeto (foto_objeto_id, foto, objeto_id) values (1, 'fa4731415f70c6bd33f7cefa1ddef7b1832194551cdbb3e7564e67e6f747849f', 25);
 insert into foto_objeto (foto_objeto_id, foto, objeto_id) values (2, '19b904e721a6c2fd3f7af105c327a25de0af845b2ccc4c237885d5065a35cd6f', 300);
 insert into foto_objeto (foto_objeto_id, foto, objeto_id) values (3, '4f7e1c016b20f11730ca8661bb4f2ed17d5a459c893ae1481105dc8e198b799b', 78);
@@ -3502,6 +3515,8 @@ insert into historico_status_objeto (historico_status_objeto_id, fecha_status, o
 insert into historico_status_objeto (historico_status_objeto_id, fecha_status, objeto_id, status_objeto_id) values (199, to_date('2020-03-27 07:45:02', 'YYYY-MM-DD HH24:MI:SS'), 110, 1);
 insert into historico_status_objeto (historico_status_objeto_id, fecha_status, objeto_id, status_objeto_id) values (200, to_date('2019-09-23 11:37:28', 'YYYY-MM-DD HH24:MI:SS'), 153, 2);
 --OFERTA
+disc
+conn u_usr/u_usr
 insert into oferta (oferta_id, fecha, precio, comprador_id, objeto_id) values (1,   to_date('2019-07-22 00:51:46', 'YYYY-MM-DD HH24:MI:SS'), 81670, 313, 130);
 insert into oferta (oferta_id, fecha, precio, comprador_id, objeto_id) values (2,   to_date('2019-10-17 08:25:40', 'YYYY-MM-DD HH24:MI:SS'), 533045, 390, 241);
 insert into oferta (oferta_id, fecha, precio, comprador_id, objeto_id) values (3,   to_date('2019-07-12 21:40:26', 'YYYY-MM-DD HH24:MI:SS'), 647511, 91, 117);
@@ -4704,15 +4719,12 @@ insert into password_comprador (password_comprador_id, password, comprador_id) v
 insert into password_comprador (password_comprador_id, password, comprador_id) values (999, 'uSr8JbRU', 999);
 insert into password_comprador (password_comprador_id, password, comprador_id) values (1000, 'tnB55HK', 1000);
 --ACTIVANDO DATOS REDO
-alter table password_comprador logging;
-alter table oferta logging;
+disc
+conn u_obj/u_obj
+
 alter table historico_status_objeto logging;
 alter table foto_objeto logging;
-alter table factura logging;
-alter table tarjeta logging;
-alter table cuenta_banco logging;
 alter table casa logging;
-alter table banco logging;
 alter table auto logging;
 alter table modelo logging;
 alter table marca logging;
@@ -4720,7 +4732,19 @@ alter table actividad_hacienda logging;
 alter table hacienda logging;
 alter table objeto logging;
 alter table status_objeto logging;
+alter table actividad logging;
+
+
+
+disc
+conn u_usr/u_usr
+
+alter table password_comprador logging;
+alter table oferta logging;
+alter table factura logging;
+alter table tarjeta logging;
+alter table cuenta_banco logging;
+alter table banco logging;
 alter table subasta logging;
 alter table comprador logging;
 alter table pais logging;
-alter table actividad logging;
