@@ -5,12 +5,21 @@
 
 mv fotos_tbs.dbf fotos_tbs.dfb.bak
 
+#En SQL PLUS:
+# startup
+
 # Recuperación manual:
 # mv fotos_tbs.dbf.bak fotos_tbs.dfb
+# En SQL PLUS:
+# alter database datafile 10 online;
+# alter database open;
+
+# Recuperación con DRA
 
 export ORACLE_SID=chjoproy
 rman
 connect target "sys@chjoproy/system2 as sysdba"
+list failure;
 advise failure;
 
 # Repair script: /u01/app/oracle/diag/rdbms/chjoproy/chjoproy/hm/reco_3059532376.hm
