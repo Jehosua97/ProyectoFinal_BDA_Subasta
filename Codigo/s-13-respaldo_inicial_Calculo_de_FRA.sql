@@ -8,13 +8,13 @@
 --debido al espacio en disco con el que se cuneta en la base de daos se tendrá una política de retención de 1 backups, el tamaño
 -- total en disco disponible para almacenar estos backups es de 2Gb sin embargo podemos aumentarlo en el momento que sea necesario
 --Cabe mencionar que se tiene que tener esta carpeta ya creada
---mkdir -p $ORACLE_BASE2/oradata/CHJOPROY/disk_1/fast-reco-area
+--mkdir -p $ORACLE_BASE/oradata/CHJOPROY/disk_1/fast-reco-area
 
 
 --rman target /
 
 --Indicandole que se harán los respaldos en disco y declarando la ruta
-configure channel device type disk format '/u05/oradata/CHJOPROY/disk_1/fast-reco-area/backup_%U.bkp' maxpiecesize 2G;
+configure channel device type disk format '/u01/app/oracle/oradata/CHJOPROY/disk_1/fast-reco-area/backup_%U.bkp' maxpiecesize 2G;
 
 --Desde RMAN para especificar cuantos backups deben ser conservados, en este caso vamos a configurarlo a dos
 configure retention policy to redundancy 1;

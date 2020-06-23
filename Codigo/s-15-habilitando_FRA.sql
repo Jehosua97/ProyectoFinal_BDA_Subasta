@@ -5,10 +5,6 @@
 -- una vez que se tienen valores que simulen la operacion diaria, recordando que se tiene que tener esta carpeta lista
 --mkdir -p $ORACLE_BASE2/oradata/CHJOPROY/disk_1/fast-reco-area
 
-
---HAY QUE CALCULAR LOS VALORES ANTES DE CORRER ESTE SCRIPT
-
-
 --Creacion de pfile de respaldo en caso de una tragedia
 create pfile='/u01/app/oracle/oradata/CHJOPROY/disk_1/dbs/initchjoproy.ora.sinFRA' from spfile;
 --Modificando los parámetros necesarios
@@ -25,9 +21,7 @@ startup;
 
 --Formato y ruta de donde se almacenarán los bakcups del control file
 configure controlfile autobackup format for device type disk clear;
-configure controlfile autobackup format for device type disk to '/u01/app/oracle/oradata/CHJOPROY/disk_1/fast-reco-area/ctl_file%F.bkp';
 
-configure channel device type disk format '/u01/app/oracle/oradata/CHJOPROY/disk_1/fast-reco-area/backup_%U.bkp' maxpiecesize 2G;
 
 
 --Una vez habilitado esto, podemos hacer un backup de prueba para verificar que se encuntre dentro de la FRA, esto desde RMAN
